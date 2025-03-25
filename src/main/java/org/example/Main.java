@@ -36,7 +36,8 @@ public class Main {
                 String title = sc.nextLine().trim();
                 System.out.print("내용 : ");
                 String body = sc.nextLine().trim();
-                String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+                String date = day();
+
 
                 Article article = new Article(id, title, body, date);
                 articles.add(article);
@@ -134,6 +135,9 @@ public class Main {
 
         System.out.println("==프로그램 끝==");
         sc.close();
+    }
+    static String day(){
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 }
 
