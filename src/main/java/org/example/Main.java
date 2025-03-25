@@ -61,11 +61,29 @@ public class Main {
 
                     }
                 }
+            } else if (cmd.contains("article list ")) {
+                String check = cmd.split(" ")[2];
+                Article foundArticle = null;
+                for (int i = articles.size() - 1; i >= 0; i--) {
+                    Article article = articles.get(i);
+                    if (article.getTitle().contains(check)) {
+                        if (Util.getNowStr().split(" ")[0].equals(article.getRegDate().split(" ")[0])) {
+                            System.out.printf("  %d   /    %s        /    %s     /    %s   \n", article.getId(), article.getRegDate().split(" ")[1], article.getTitle(), article.getBody());
+                        } else {
+                            System.out.printf("  %d   /    %s        /    %s     /    %s   \n", article.getId(), article.getRegDate().split(" ")[0], article.getTitle(), article.getBody());
+                        }
+                        foundArticle = article;
+                    }
+                }
+                if (foundArticle == null) {
+                    System.out.println("해당 글이 존재하지 않습니다.");
+                }
+
             } else if (cmd.startsWith("article detail")) {
                 System.out.println("==게시글 상세보기==");
 
                 int id = Integer.parseInt(cmd.split(" ")[2]);
-                Article foundArticle = Util.fu1(articles,id);
+                Article foundArticle = Util.fu1(articles, id);
 
 
                 if (foundArticle == null) {
@@ -83,7 +101,7 @@ public class Main {
 
                 int id = Integer.parseInt(cmd.split(" ")[2]);
 
-                Article foundArticle = Util.fu1(articles,id);
+                Article foundArticle = Util.fu1(articles, id);
 
                 if (foundArticle == null) {
                     System.out.println("해당 게시글은 없습니다");
@@ -96,7 +114,7 @@ public class Main {
 
                 int id = Integer.parseInt(cmd.split(" ")[2]);
 
-                Article foundArticle = Util.fu1(articles,id);
+                Article foundArticle = Util.fu1(articles, id);
 
                 if (foundArticle == null) {
                     System.out.println("해당 게시글은 없습니다");
@@ -125,12 +143,15 @@ public class Main {
         sc.close();
     }
 
-    /**테스트 데이터 생성 함수**/
+    /**
+     * 테스트 데이터 생성 함수
+     **/
     private static void makeTestData() {
         System.out.println("==테스트 데이터 생성==");
         articles.add(new Article(1, "2024-12-12 12:12:12", "2024-12-12 12:12:12", "제목1", "내용1"));
-        articles.add(new Article(2, Util.getNowStr(), Util.getNowStr(), "제목2", "내용2"));
+        articles.add(new Article(2, Util.getNowStr(), Util.getNowStr(), "목2", "내용2"));
         articles.add(new Article(3, Util.getNowStr(), Util.getNowStr(), "제목3", "내용3"));
+        articles.add(new Article(4, Util.getNowStr(), Util.getNowStr(), "4", "내용4"));
     }
 }
 

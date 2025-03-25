@@ -17,7 +17,6 @@ public class Util {
         for (Article article : Main.articles) {
             if (article.getId() == id) {
                 foundArticle = article;
-                System.out.println(foundArticle.getId());
                 break;
             }
         }
