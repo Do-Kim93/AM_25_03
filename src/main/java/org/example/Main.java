@@ -5,16 +5,18 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+
+    static List<Article> articles = new ArrayList<>();
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
 
         System.out.println("==프로그램 시작==");
 
-        int lastArticleId = 0;
-        List<Article> articles = new ArrayList<>();
+        int lastArticleId = 3;
 
-        makeTestData(articles);
+        makeTestData();
 
         while (true) {
             System.out.print("명령어) ");
@@ -63,15 +65,8 @@ public class Main {
                 System.out.println("==게시글 상세보기==");
 
                 int id = Integer.parseInt(cmd.split(" ")[2]);
+                Article foundArticle = Util.fu1(articles,id);
 
-                Article foundArticle = null;
-
-                for (Article article : articles) {
-                    if (article.getId() == id) {
-                        foundArticle = article;
-                        break;
-                    }
-                }
 
                 if (foundArticle == null) {
                     System.out.println("해당 게시글은 없습니다");
@@ -88,14 +83,7 @@ public class Main {
 
                 int id = Integer.parseInt(cmd.split(" ")[2]);
 
-                Article foundArticle = null;
-
-                for (Article article : articles) {
-                    if (article.getId() == id) {
-                        foundArticle = article;
-                        break;
-                    }
-                }
+                Article foundArticle = Util.fu1(articles,id);
 
                 if (foundArticle == null) {
                     System.out.println("해당 게시글은 없습니다");
@@ -108,14 +96,7 @@ public class Main {
 
                 int id = Integer.parseInt(cmd.split(" ")[2]);
 
-                Article foundArticle = null;
-
-                for (Article article : articles) {
-                    if (article.getId() == id) {
-                        foundArticle = article;
-                        break;
-                    }
-                }
+                Article foundArticle = Util.fu1(articles,id);
 
                 if (foundArticle == null) {
                     System.out.println("해당 게시글은 없습니다");
@@ -144,17 +125,13 @@ public class Main {
         sc.close();
     }
 
-    private static void makeTestData(List<Article> articles) {//인자로 리스트를 받아버림 그래야 저장하고 쓸수가 있음 저거 없으면 저장 안됨
-        String regDate = Util.getNowStr();
-        String updateDate = Util.getNowStr();
-        Article article = new Article(1, regDate, updateDate, "dnasdf", "asdfasdf");
-        Article article1 = new Article(2, regDate, updateDate, "fff", "aaa");
-        Article article2 = new Article(3, regDate, updateDate, "fffbbb", "aaabbb");
-        articles.add(article);
-        articles.add(article1);
-        articles.add(article2);
+    /**테스트 데이터 생성 함수**/
+    private static void makeTestData() {
+        System.out.println("==테스트 데이터 생성==");
+        articles.add(new Article(1, "2024-12-12 12:12:12", "2024-12-12 12:12:12", "제목1", "내용1"));
+        articles.add(new Article(2, Util.getNowStr(), Util.getNowStr(), "제목2", "내용2"));
+        articles.add(new Article(3, Util.getNowStr(), Util.getNowStr(), "제목3", "내용3"));
     }
-
 }
 
 class Article {
