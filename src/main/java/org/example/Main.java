@@ -189,8 +189,7 @@ public class Main {
                 }
 
             } else if (cmd.equals("로그인 정보")) {
-                System.out.println("회원 번호 : " + now.getId() + "  회원 아이디 : " + now.getLoginId() + "  회원 비밀번호 : " + now.getLoginPw() + "  회원 이름" + now.getName() + "  회원 가입 날짜 : " + now.getRegDate());
-                continue;
+                System.out.println("회원 번호 : " + now.getId() + "  회원 아이디 : " + now.getLoginId() + "  회원 비밀번호 : " + now.getLoginPw() + "  회원 이름 " + now.getName() + "  회원 가입 날짜 : " + now.getRegDate());
             } else if (cmd.equals("login")) {
                 while (true) {
                     System.out.print("아이디 입력 : ");
@@ -215,7 +214,6 @@ public class Main {
 
                 }
                 System.out.println(now.name + "님 로그인 되셨습니다.");
-                continue;
             } else if (cmd.equals("logout")) {
                 System.out.println(now.name + "님 정말 로그아웃 하시겠습니까? 'y/n'");
                 String answer = sc.nextLine().trim();
@@ -226,17 +224,15 @@ public class Main {
                     } catch (NullPointerException e) {
                         System.out.println("로그아웃 되었습니다.");
                     }
-                    continue;
                 }
 
             } else {
                 System.out.println("사용할 수 없는 명령어입니다");
-                continue;
             }
-
-            System.out.println("==프로그램 끝==");
-            sc.close();
         }
+        System.out.println("==프로그램 끝==");
+        sc.close();
+
     }
 
     /**
