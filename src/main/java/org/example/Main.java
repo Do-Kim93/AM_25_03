@@ -14,7 +14,7 @@ public class Main {
         int lastArticleId = 0;
         List<Article> articles = new ArrayList<>();
 
-//        makeTestData();
+        makeTestData(articles);
 
         while (true) {
             System.out.print("명령어) ");
@@ -143,6 +143,18 @@ public class Main {
         System.out.println("==프로그램 끝==");
         sc.close();
     }
+
+    private static void makeTestData(List<Article> articles) {//인자로 리스트를 받아버림 그래야 저장하고 쓸수가 있음 저거 없으면 저장 안됨
+        String regDate = Util.getNowStr();
+        String updateDate = Util.getNowStr();
+        Article article = new Article(1, regDate, updateDate, "dnasdf", "asdfasdf");
+        Article article1 = new Article(2, regDate, updateDate, "fff", "aaa");
+        Article article2 = new Article(3, regDate, updateDate, "fffbbb", "aaabbb");
+        articles.add(article);
+        articles.add(article1);
+        articles.add(article2);
+    }
+
 }
 
 class Article {
