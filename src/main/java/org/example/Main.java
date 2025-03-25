@@ -1,5 +1,7 @@
 package org.example;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -34,8 +36,9 @@ public class Main {
                 String title = sc.nextLine().trim();
                 System.out.print("내용 : ");
                 String body = sc.nextLine().trim();
+                String date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 
-                Article article = new Article(id, title, body);
+                Article article = new Article(id, title, body, date);
                 articles.add(article);
 
                 System.out.println(id + "번 글이 작성되었습니다");
@@ -70,6 +73,7 @@ public class Main {
                     continue;
                 }
                 System.out.println("번호 : " + foundArticle.getId());
+                System.out.println("내용 : " + foundArticle.getDate());
                 System.out.println("제목 : " + foundArticle.getTitle());
                 System.out.println("내용 : " + foundArticle.getBody());
 
@@ -137,15 +141,21 @@ class Article {
     private int id;
     private String title;
     private String body;
+    private String date;
 
-    public Article(int id, String title, String body) {
+    public Article(int id, String title, String body, String date) {
         this.id = id;
         this.title = title;
         this.body = body;
+        this.date = date;
     }
 
     public int getId() {
         return id;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     public void setId(int id) {
