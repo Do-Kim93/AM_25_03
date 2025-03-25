@@ -64,21 +64,26 @@ public class Main {
             } else if (cmd.contains("article list ")) {
                 String check = cmd.split(" ")[2];
                 Article foundArticle = null;
+                List<Article> articles1 = new ArrayList<>();// 기존 버전으로 사용하면 번호 / 날짜 / 제목/ 내용을 찍기가 어려워서 그냥 리스트를 새로 마나 짜서 검색어에 걸리는 객체들 다시 저장 시킴
                 for (int i = articles.size() - 1; i >= 0; i--) {
                     Article article = articles.get(i);
                     if (article.getTitle().contains(check)) {
+                       articles1.add(article);
+                       foundArticle = article;
+                    }
+                }
+                if (foundArticle != null) {
+                    System.out.println("   번호    /     날짜       /   제목     /    내용   ");
+                    for (Article article : articles1) {
                         if (Util.getNowStr().split(" ")[0].equals(article.getRegDate().split(" ")[0])) {
                             System.out.printf("  %d   /    %s        /    %s     /    %s   \n", article.getId(), article.getRegDate().split(" ")[1], article.getTitle(), article.getBody());
                         } else {
                             System.out.printf("  %d   /    %s        /    %s     /    %s   \n", article.getId(), article.getRegDate().split(" ")[0], article.getTitle(), article.getBody());
                         }
-                        foundArticle = article;
                     }
-                }
-                if (foundArticle == null) {
+                }else {
                     System.out.println("해당 글이 존재하지 않습니다.");
                 }
-
             } else if (cmd.startsWith("article detail")) {
                 System.out.println("==게시글 상세보기==");
 
