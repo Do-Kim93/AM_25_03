@@ -1,4 +1,4 @@
-package org.example;
+package org.example.controller;
 
 public class Controller {
     public void doAction(String cmd, String actionMethodName) {

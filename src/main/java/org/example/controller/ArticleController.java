@@ -1,4 +1,7 @@
-package org.example;
+package org.example.controller;
+
+import org.example.util.Util;
+import org.example.dto.Article;
 
 import java.util.ArrayList;
 import java.util.List;
