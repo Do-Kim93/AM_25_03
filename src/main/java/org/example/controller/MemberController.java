@@ -12,7 +12,7 @@ public class MemberController extends Controller {
     private Scanner sc;
     private List<Member> members;
     private String cmd;
-    private Member loginedMember = null;
+    static Member loginedMember = null;
 
     int lastMemberId = 3;
 
@@ -40,7 +40,7 @@ public class MemberController extends Controller {
         }
     }
 
-    private boolean isLogined() {
+    public static boolean isLogined() {
         return loginedMember != null;
     }
 
