@@ -1,7 +1,7 @@
 package org.example.controller;
 
-import org.example.util.Util;
 import org.example.dto.Member;
+import org.example.util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +12,13 @@ public class MemberController extends Controller {
     private Scanner sc;
     private List<Member> members;
     private String cmd;
+    private Member loginedMember = null;
 
     int lastMemberId = 3;
-    Member nowMember = null;
 
     public MemberController(Scanner sc) {
         this.sc = sc;
         members = new ArrayList<>();
-
     }
 
     public void doAction(String cmd, String actionMethodName) {
@@ -41,45 +40,56 @@ public class MemberController extends Controller {
         }
     }
 
-    private void doLogout() {
-        System.out.println(nowMember.getName() +"님 정말 로그아웃 하시겠습니까? 'y/n'");
-        String answer = sc.nextLine();
-        if (answer.equals("y")) {
-            nowMember = null;
-        }try{
-            System.out.println(nowMember.getName());
-        }catch (NullPointerException e){
-            System.out.println("로그아웃 되셨습니다.");
-        }
+    private boolean isLogined() {
+        return loginedMember != null;
     }
 
     private void doLogin() {
-
-        while (true) {
-            System.out.println("아이디입력해봐");
-            String loginId = sc.nextLine().trim();
-            System.out.println("비번입력해봐");
-            String loginPw = sc.nextLine().trim();
-            int idcheck = 0;
-            for (Member member : members) {
-                if (loginId.equals(member.getLoginId())) {
-                    nowMember = member;
-                    idcheck++;
-                    if (loginPw.equals(member.getPassword())) {
-                        System.out.println(nowMember.getName() + "님 반갑습니다.로그인 성공");
-                        idcheck++;
-                        break;
-                    }
-                }
-            }if (idcheck == 0) {
-                System.out.println("아이디를 잘못");
-                continue;
-            }else if (idcheck == 1) {
-                System.out.println("비번이 잘못");
-                continue;
-            }break;
+        if (isLogined()) {
+            System.out.println("이미 로그인중");
+            return;
         }
+        System.out.println("==로그인==");
+
+        System.out.print("로그인 아이디 : ");
+        String loginId = sc.nextLine().trim();
+        System.out.print("비밀번호 : ");
+        String password = sc.nextLine().trim();
+
+        // 얘 내 회원인가??? -> 사용자가 방금 입력한 로그인 아이디와 일치하는 회원이 나한테 있나?
+
+        Member member = getMemberByLoginId(loginId);
+
+        if (member == null) {
+            System.out.println("일치하는 회원이 없어");
+            return;
+        }
+
+        // 있어. // 내가 알고있는 이 사람의 비번이 지금 얘가 입력한거랑 같아?
+
+        if (member.getPassword().equals(password) == false) {
+            System.out.println("비번이 틀렸어");
+            return;
+        }
+
+        // 로그인 성공
+        loginedMember = member; // 로그인 상태 저장
+
+        System.out.printf("%s님 로그인 성공!\n", loginedMember.getName());
     }
+
+
+    private void doLogout() {
+        if (!isLogined()) {
+            System.out.println("이미 로그아웃중");
+            return;
+        }
+
+        loginedMember = null;
+
+        System.out.println("로그아웃 되었습니다");
+    }
+
 
     private void doJoin() {
         System.out.println("==회원가입==");
@@ -117,6 +127,15 @@ public class MemberController extends Controller {
 
         System.out.println(id + "번 회원이 가입되었습니다");
         lastMemberId++;
+    }
+
+    private Member getMemberByLoginId(String loginId) {
+        for (Member member : members) {
+            if (member.getLoginId().equals(loginId)) {
+                return member;
+            }
+        }
+        return null;
     }
 
     private boolean isJoinableLoginId(String loginId) {
