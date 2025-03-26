@@ -4,10 +4,6 @@ import java.util.Scanner;
 
 public class App {
 
-
-    public App() {
-
-    }
     public void run() {
 
         Scanner sc = new Scanner(System.in);
@@ -16,8 +12,6 @@ public class App {
 
         MemberController memberController = new MemberController(sc);
         ArticleController articleController = new ArticleController(sc);
-
-
 
         articleController.makeTestData();
         memberController.makeTestData();
@@ -37,22 +31,15 @@ public class App {
             if (cmd.equals("member join")) {
                 memberController.doJoin();
             } else if (cmd.equals("article write")) {
-                articleController.dowrite();
-
+                articleController.doWrite();
             } else if (cmd.startsWith("article list")) {
-                articleController.showlist(cmd);
-
-
+                articleController.showList(cmd);
             } else if (cmd.startsWith("article detail")) {
-                articleController.showdetail(cmd);
-
-
+                articleController.showDetail(cmd);
             } else if (cmd.startsWith("article delete")) {
-                articleController.remove(cmd);
-
+                articleController.doDelete(cmd);
             } else if (cmd.startsWith("article modify")) {
-                articleController.update(cmd);
-
+                articleController.doModify(cmd);
             } else {
                 System.out.println("사용할 수 없는 명령어입니다");
             }
@@ -62,10 +49,4 @@ public class App {
         System.out.println("==프로그램 끝==");
         sc.close();
     }
-
-
-
-
-
-
 }
