@@ -1,18 +1,20 @@
 package org.example.dto;
 
 public class Article extends Dto {
-    public Member loginedMember;
+
     private String updateDate;
     private String title;
     private String body;
 
-    public Article(int id, String regDate, String updateDate, String title, String body, Member loginedMember) {
+    private int memberId;
+
+    public Article(int id, String regDate, String updateDate, int memberId, String title, String body) {
         this.id = id;
         this.regDate = regDate;
+        this.memberId = memberId;
         this.updateDate = updateDate;
         this.title = title;
         this.body = body;
-        this.loginedMember = loginedMember;
     }
 
     public String getUpdateDate() {
@@ -23,16 +25,16 @@ public class Article extends Dto {
         this.updateDate = updateDate;
     }
 
+    public int getMemberId() {
+        return memberId;
+    }
+
+    public void setMemberId(int memberId) {
+        this.memberId = memberId;
+    }
+
     public String getRegDate() {
         return regDate;
-    }
-
-    public Member getLoginedMember() {
-        return loginedMember;
-    }
-
-    public void setLoginedMember(Member loginedMember) {
-        this.loginedMember = loginedMember;
     }
 
     public void setRegDate(String regDate) {
