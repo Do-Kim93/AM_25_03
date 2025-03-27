@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.dto.Member;
 import org.example.util.Util;
 import org.example.dto.Article;
 
@@ -195,8 +196,8 @@ public class ArticleController extends Controller {
      **/
     public void makeTestData() {
         System.out.println("==게시글 테스트 데이터 생성==");
-        articles.add(new Article(1, "2024-12-12 12:12:12", "2024-12-12 12:12:12", "제목123", "내용1", loginedMember));
-        articles.add(new Article(2, Util.getNowStr(), Util.getNowStr(), "제목27", "내용2", loginedMember));
-        articles.add(new Article(3, Util.getNowStr(), Util.getNowStr(), "제목1233", "내용3", loginedMember));
+        articles.add(new Article(1, "2024-12-12 12:12:12", "2024-12-12 12:12:12", "제목123", "내용1", new Member(1, Util.getNowStr(), "test1", "test1", "test1")));
+        articles.add(new Article(2, Util.getNowStr(), Util.getNowStr(), "제목27", "내용2", new Member(2, Util.getNowStr(), "test2", "test2", "test2")));
+        articles.add(new Article(3, Util.getNowStr(), Util.getNowStr(), "제목1233", "내용3", new Member(3, Util.getNowStr(), "test3", "test3", "test3")));
     }
 }
